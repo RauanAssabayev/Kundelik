@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_schedule">
+
+    <TextView
+        android:id="@+id/tvsScheduleTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="right|center_vertical"
+        android:paddingRight="10dp"
+        android:text="@string/schedule_main_text"
+        android:textColor="#0b0033"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tvsFullDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="right|center_vertical"
+        android:paddingRight="10dp"
+        android:text="Вторник, 19 Сентярбря"
+        android:textColor="#0b0033"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:background="#FF0000FF" />
+
+    <!-- A RecyclerView with some commonly used attributes -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_day_subjects"
+        android:layout_marginTop="10dp"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

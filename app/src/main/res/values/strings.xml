@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Kundelik</string>
+    <string name="menu_profile">Профиль</string>
+    <string name="menu_schedule">Расписание</string>
+    <string name="menu_games">Игры</string>
+    <string name="menu_news">Новости</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="schedule_main_text">Мое расписание</string>
+</resources>

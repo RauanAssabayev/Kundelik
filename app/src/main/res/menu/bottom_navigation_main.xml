@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@drawable/bn_profile_white"
+        android:title="@string/menu_profile"
+        app:showAsAction="ifRoom"
+         />
+    <item
+        android:id="@+id/action_schedule"
+        android:enabled="true"
+        android:icon="@drawable/bn_schedule_white"
+        android:title="@string/menu_schedule"
+        app:showAsAction="ifRoom"
+
+         />
+    <item
+        android:id="@+id/action_game"
+        android:enabled="true"
+        android:icon="@drawable/bn_game_white"
+        android:title="@string/menu_games"
+        app:showAsAction="ifRoom"
+         />
+    <item
+        android:id="@+id/action_news"
+        android:enabled="true"
+        android:icon="@drawable/bn_news_white"
+        android:title="@string/menu_news"
+        app:showAsAction="ifRoom"
+        />
+</menu>
