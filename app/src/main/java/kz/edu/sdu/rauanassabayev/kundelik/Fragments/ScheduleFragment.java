@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import kz.edu.sdu.rauanassabayev.kundelik.Adapters.DaySubjectsAdapter;
@@ -33,6 +32,7 @@ public class ScheduleFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     List<DaySubject> daySubjectList = new ArrayList<>();
     @BindView(R.id.tvsFullDay)TextView tvsFullDay;
+    @BindView(R.id.tvsScheduleTitle) TextView tvsScheduleTitle;
     @BindView(R.id.rv_day_subjects)RecyclerView rvDaySubjects;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -52,6 +52,12 @@ public class ScheduleFragment extends Fragment {
         daySubjectList.add(d1);
         mAdapter = new DaySubjectsAdapter(daySubjectList);
         rvDaySubjects.setAdapter(mAdapter);
+
+        Typeface fontComfortaaRegular = Typeface.createFromAsset(getActivity().getAssets(), "Comfortaa-Regular.ttf");
+        tvsFullDay.setTypeface(fontComfortaaRegular);
+
+        Typeface fontComfotaaBold = Typeface.createFromAsset(getActivity().getAssets(), "Comfortaa-Bold.ttf");
+        tvsScheduleTitle.setTypeface(fontComfotaaBold);
 
         setMainDate();
 

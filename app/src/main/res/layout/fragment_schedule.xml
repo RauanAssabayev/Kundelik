@@ -15,7 +15,7 @@
         android:paddingRight="10dp"
         android:text="@string/schedule_main_text"
         android:textColor="#0b0033"
-        android:textSize="25sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/tvsFullDay"
@@ -27,7 +27,7 @@
         android:paddingRight="10dp"
         android:text="Вторник, 19 Сентярбря"
         android:textColor="#0b0033"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <View
         android:layout_width="fill_parent"
