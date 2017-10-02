@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_schedule">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:padding="16dp"
+            app:srcCompat="@drawable/ic_left_arrow_purple" />
+        <TextView
+            android:id="@+id/tvsScheduleTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/iv_back"
+            android:layout_toRightOf="@+id/iv_back"
+            android:fontFamily="serif-monospace"
+            android:gravity="right|center_vertical"
+            android:paddingRight="10dp"
+            android:text="@string/time_table_main_text"
+            android:textColor="#0b0033"
+            android:textSize="21sp" />
+
+        <TextView
+            android:id="@+id/tvsFullDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvsScheduleTitle"
+            android:layout_toEndOf="@+id/iv_back"
+            android:layout_toRightOf="@+id/iv_back"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="right|center_vertical"
+            android:paddingRight="10dp"
+            android:text="Вторник, 19 Сентярбря"
+            android:textColor="#0b0033"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvsYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:gravity="right|center_vertical"
+        android:paddingRight="10dp"
+        android:text="2017"
+        android:textColor="#0b0033"
+        android:textSize="14sp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorPrimary" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/bg_rounded_pr"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="8"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" >
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/tv_dayOfSubject"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Вторник, 19 Сентября"
+            android:textColor="@color/colorPrimaryWhite"
+            android:textSize="15sp" />
+        <ImageButton
+            android:id="@+id/ib_addSubject"
+            android:layout_width="1dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:paddingLeft="0dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:background="@android:color/transparent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_add_white"/>
+
+    </LinearLayout>
+
+    <!-- A RecyclerView with some  used attributes -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_day_time_table"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
+</LinearLayout>

@@ -25,33 +25,48 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView menuView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer, new ScheduleFragment());
-        fragmentTransaction.commit();
+        if(savedInstanceState == null){
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.fragmentContainer, new ScheduleFragment());
+            fragmentTransaction.commit();
+        }
         new BottomNavigationViewHelper().disableShiftMode(menuView);
         menuView.setSelectedItemId(R.id.action_schedule);
         menuView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
             Fragment currentFragment = null;
             fragmentTransaction  = fragmentManager.beginTransaction();
             switch (item.getItemId()) {
                 case R.id.action_profile:
-                    if(selectedFragment != 1)currentFragment = new ProfileFragment();
+                    if(selectedFragment != 1){
+                        currentFragment = new ProfileFragment();
+                        fragmentTransaction.replace(R.id.fragmentContainer, currentFragment,"ProfileFragment");
+                    }
                     onFragmentChangeAnimation(fragmentTransaction,1);
                     break;
                 case R.id.action_schedule:
-                    if(selectedFragment != 2)currentFragment = new ScheduleFragment();
+                    if(selectedFragment != 2){
+                        currentFragment = new ScheduleFragment();
+                        fragmentTransaction.replace(R.id.fragmentContainer, currentFragment,"ScheduleFragment");
+                    }
                     onFragmentChangeAnimation(fragmentTransaction,2);
                     break;
                 case R.id.action_game:
-                    if(selectedFragment != 3)currentFragment = new GameFragment();
+                    if(selectedFragment != 3){
+                        currentFragment = new GameFragment();
+                        fragmentTransaction.replace(R.id.fragmentContainer, currentFragment,"GameFragment");
+                    }
                     onFragmentChangeAnimation(fragmentTransaction,3);
                     break;
                 case R.id.action_news:
-                    if(selectedFragment != 4)currentFragment = new NewsFragment();
+                    if(selectedFragment != 4){
+                        currentFragment = new NewsFragment();
+                        fragmentTransaction.replace(R.id.fragmentContainer, currentFragment,"NewsFragment");
+                    }
                     onFragmentChangeAnimation(fragmentTransaction,4);
                     break;
                 default:
@@ -59,10 +74,11 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             if (currentFragment != null) {
-                fragmentTransaction.replace(R.id.fragmentContainer, currentFragment);
-                fragmentTransaction.addToBackStack(null);
+                //fragmentTransaction.addToBackStack(null);
+                //fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 fragmentTransaction.commit();
             }
+
             return true;
             }
     });
@@ -76,16 +92,20 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2:
                 if(selectedFragment == 1){
-                    fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);}
+                    fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
+                }
                 else if(selectedFragment == 3 || selectedFragment == 4){
-                    fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right);}
+                    fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right);
+                }
                 selectedFragment = 2;
                 break;
             case 3:
                 if(selectedFragment == 1 || selectedFragment == 2){
-                    fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);}
+                    fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
+                }
                 else if(selectedFragment == 4){
-                    fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right);}
+                    fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right);
+                }
                 selectedFragment = 3;
                 break;
             case 4:
