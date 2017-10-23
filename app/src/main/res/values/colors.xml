@@ -10,6 +10,7 @@
     <color name="colorPrimaryGreen">#0F0</color>
     <color name="colorPrimaryBlue">#00B</color>
     <color name="colorSecondaryRed">#FF6B6B</color>
+    <color name="colorSecondaryGray">#F6F6F6</color>
 </resources>
 
 

@@ -1,33 +1,27 @@
 package kz.edu.sdu.rauanassabayev.kundelik.Fragments;
 
-import android.content.Context;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.TooManyListenersException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import kz.edu.sdu.rauanassabayev.kundelik.Adapters.DaySubjectsAdapter;
-import kz.edu.sdu.rauanassabayev.kundelik.Models.DaySubject;
+import kz.edu.sdu.rauanassabayev.kundelik.Models.WeekSubject;
 import kz.edu.sdu.rauanassabayev.kundelik.R;
 import kz.edu.sdu.rauanassabayev.kundelik.Utils.RecyclerItemClickListener;
 
@@ -35,7 +29,7 @@ public class ScheduleFragment extends Fragment {
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    List<DaySubject> daySubjectList = new ArrayList<>();
+    List<WeekSubject> daySubjectList = new ArrayList<>();
     @BindView(R.id.tvsFullDay)TextView tvsFullDay;
     @BindView(R.id.tvsScheduleTitle) TextView tvsScheduleTitle;
     @BindView(R.id.tvsYear) TextView tvsYear;
@@ -53,13 +47,13 @@ public class ScheduleFragment extends Fragment {
         rvDaySubjects.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         rvDaySubjects.setLayoutManager(mLayoutManager);
-        DaySubject d1 = new DaySubject("Пн","1");
-        DaySubject d2 = new DaySubject("Вт","2");
-        DaySubject d3 = new DaySubject("Ср","3");
-        DaySubject d4 = new DaySubject("Чт","4");
-        DaySubject d5 = new DaySubject("Пт","5");
-        DaySubject d6 = new DaySubject("Сб","6");
-        DaySubject d7 = new DaySubject("Вс","7");
+        WeekSubject d1 = new WeekSubject("Пн","1");
+        WeekSubject d2 = new WeekSubject("Вт","2");
+        WeekSubject d3 = new WeekSubject("Ср","3");
+        WeekSubject d4 = new WeekSubject("Чт","4");
+        WeekSubject d5 = new WeekSubject("Пт","5");
+        WeekSubject d6 = new WeekSubject("Сб","6");
+        WeekSubject d7 = new WeekSubject("Вс","7");
         daySubjectList.add(d1);
         daySubjectList.add(d2);
         daySubjectList.add(d3);
@@ -78,7 +72,6 @@ public class ScheduleFragment extends Fragment {
         rvDaySubjects.addOnItemTouchListener(
                 new RecyclerItemClickListener(getContext(), rvDaySubjects  ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        Toast.makeText(getActivity().getApplicationContext(),"GOGO",Toast.LENGTH_LONG).show();
                         final FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.replace(R.id.fragmentContainer, new TimeTableFragment(), "GameFragment");
                         ft.commit();
@@ -88,7 +81,6 @@ public class ScheduleFragment extends Fragment {
                     }
                 })
         );
-
 
 //        tv = (TextView) getActivity().findViewById(R.id.textView);
 //        tv.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +98,7 @@ public class ScheduleFragment extends Fragment {
         Calendar mCalendar= Calendar.getInstance();
         String month = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         String dayweek = mCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
-        int day = mCalendar.DAY_OF_WEEK_IN_MONTH;
+        int day = mCalendar.get(Calendar.DAY_OF_MONTH);
         month = month.substring(0, 1).toUpperCase() + month.substring(1);
         dayweek   = dayweek.substring(0, 1).toUpperCase() + dayweek.substring(1);
         tvsFullDay.setText(dayweek+", "+day+" "+month);

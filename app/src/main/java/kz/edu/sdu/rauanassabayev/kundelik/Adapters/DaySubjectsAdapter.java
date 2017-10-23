@@ -3,14 +3,10 @@ package kz.edu.sdu.rauanassabayev.kundelik.Adapters;
 /**
  * Created by rauanassabayev on 9/26/17.
  */
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +14,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import kz.edu.sdu.rauanassabayev.kundelik.Fragments.GameFragment;
-import kz.edu.sdu.rauanassabayev.kundelik.Models.DaySubject;
+import kz.edu.sdu.rauanassabayev.kundelik.Models.WeekSubject;
 import kz.edu.sdu.rauanassabayev.kundelik.R;
 
 public class DaySubjectsAdapter extends RecyclerView.Adapter<DaySubjectsAdapter.MyViewHolder>{
-    private List<DaySubject> dataSet;
+    private List<WeekSubject> dataSet;
     Typeface fontComfortaaRegular;
     Typeface fontComfotaaBold;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -37,7 +32,7 @@ public class DaySubjectsAdapter extends RecyclerView.Adapter<DaySubjectsAdapter.
             vRightLine            = (View) itemView.findViewById(R.id.vRightLine);
         }
     }
-    public DaySubjectsAdapter(List<DaySubject> dataModels) {
+    public DaySubjectsAdapter(List<WeekSubject> dataModels) {
         this.dataSet = dataModels;
     }
     @Override
@@ -53,6 +48,12 @@ public class DaySubjectsAdapter extends RecyclerView.Adapter<DaySubjectsAdapter.
     public void onBindViewHolder(final MyViewHolder holder,int position) {
         TextView tv_day = holder.tv_day;
         TextView tv_countSubjects = holder.tv_countSubjects;
+        if(Build.VERSION.SDK_INT<20){
+            tv_countSubjects.setGravity(Gravity.CENTER | Gravity.TOP);
+            tv_day.setGravity(Gravity.CENTER | Gravity.TOP);
+            tv_countSubjects.setPadding(0,15,0,0);
+            tv_day.setPadding(0,15,0,0);
+        }
         tv_day.setTypeface(fontComfotaaBold);
         tv_countSubjects.setTypeface(fontComfortaaRegular);
         tv_day.setText(dataSet.get(position).getDay());

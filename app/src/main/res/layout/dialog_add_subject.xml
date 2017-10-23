@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:weightSum="10">
+        <TextView
+            android:id="@+id/tv_new_subject"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/dg_new_subject"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22sp" />
+        <ImageButton
+            android:id="@+id/ib_close_new_subject"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@android:color/transparent"
+            android:padding="20dp"  
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_close" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorSecondaryGray">
+        <TextView
+            android:id="@+id/tv_select_subject"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="bottom"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="6dp"
+            android:text="Выберите занятие"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/spinner_bg_main">
+            <Spinner
+                android:id="@+id/sp_select_subject"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:popupBackground="@drawable/spinner_bg_main_popup" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:weightSum="15"
+            android:layout_marginTop="15dp"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:paddingTop="6dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="6dp"
+                app:srcCompat="@drawable/ic_clock_start" />
+            <TextView
+                android:id="@+id/tv_time_from_subject"
+                android:layout_width="0dp"
+                android:layout_weight="13"
+                android:text="Начало занятия"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/spinner_bg_main">
+            <TextView
+                android:id="@+id/tv_start"
+                android:layout_width="match_parent"
+                android:text="@string/fragment.timetable.chooseTime"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/bg_dg_drawableleft_clock"
+                android:paddingLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_height="match_parent" />
+            <Spinner
+                android:id="@+id/sp_select_from_time"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:popupBackground="@drawable/spinner_bg_main" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:weightSum="15"
+            android:layout_marginTop="15dp"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:paddingTop="6dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="6dp"
+                android:paddingBottom="6dp"
+                app:srcCompat="@drawable/ic_clock_finish" />
+            <TextView
+                android:id="@+id/tv_time_to_subject"
+                android:layout_width="0dp"
+                android:layout_weight="13"
+                android:text="Конец занятия"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/spinner_bg_main">
+            <TextView
+                android:id="@+id/tv_finish"
+                android:layout_width="match_parent"
+                android:text="@string/fragment.timetable.chooseTime"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/bg_dg_drawableleft_clock"
+                android:paddingLeft="10dp"
+                android:background="@android:color/transparent"
+                android:layout_height="match_parent" />
+            <Spinner
+                android:id="@+id/sp_select_to_time"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:tooltipText="@string/dg_new_subject"
+                android:popupBackground="@drawable/spinner_bg_main" />
+        </RelativeLayout>
+        <Button
+            android:id="@+id/bt_add_subject"
+            android:layout_width="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="Добавить"
+            android:textColor="@color/colorPrimaryWhite"
+            android:background="@drawable/bg_dg_rounded_action"
+            android:layout_height="40dp" />
+    </LinearLayout>
+</LinearLayout>

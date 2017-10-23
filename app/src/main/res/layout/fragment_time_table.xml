@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp">
-
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="80dp"
@@ -29,7 +28,6 @@
             android:text="@string/time_table_main_text"
             android:textColor="#0b0033"
             android:textSize="21sp" />
-
         <TextView
             android:id="@+id/tvsFullDay"
             android:layout_width="match_parent"
@@ -45,16 +43,16 @@
             android:textSize="15sp" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tvsYear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-smallcaps"
-        android:gravity="right|center_vertical"
-        android:paddingRight="10dp"
-        android:text="2017"
-        android:textColor="#0b0033"
-        android:textSize="14sp" />
+    <!--<TextView-->
+        <!--android:id="@+id/tvsYear"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:fontFamily="sans-serif-smallcaps"-->
+        <!--android:gravity="right|center_vertical"-->
+        <!--android:paddingRight="10dp"-->
+        <!--android:text="2017"-->
+        <!--android:textColor="#0b0033"-->
+        <!--android:textSize="14sp" />-->
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
@@ -63,7 +61,6 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
         android:background="@color/colorPrimary" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_marginTop="18dp"
@@ -100,13 +97,12 @@
             android:background="@android:color/transparent"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/ic_add_white"/>
-
     </LinearLayout>
-
     <!-- A RecyclerView with some  used attributes -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_day_time_table"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="58dp"
         android:scrollbars="vertical" />
 </LinearLayout>

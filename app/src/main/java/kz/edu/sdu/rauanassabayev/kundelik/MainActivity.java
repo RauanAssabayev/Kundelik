@@ -1,29 +1,57 @@
 package kz.edu.sdu.rauanassabayev.kundelik;
 
+import android.content.Intent;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.util.Locale;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.GameFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.NewsFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ProfileFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ScheduleFragment;
+import kz.edu.sdu.rauanassabayev.kundelik.Fragments.TimeTableFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Utils.BottomNavigationViewHelper;
 
 public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     int selectedFragment = 2;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Resources res = getApplicationContext().getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale("kk");
+        res.updateConfiguration(conf, dm);
+//        Intent refresh = new Intent(MainActivity.this, MainActivity.class);
+//        startActivity(refresh);
+//        finish();
+
+
+
         setContentView(R.layout.activity_main);
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder().name(Realm.DEFAULT_REALM_NAME).build();
+        Realm.setDefaultConfiguration(config);
         BottomNavigationView menuView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         if(savedInstanceState == null){
             fragmentManager = getSupportFragmentManager();
@@ -31,13 +59,12 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.add(R.id.fragmentContainer, new ScheduleFragment());
             fragmentTransaction.commit();
         }
+
         new BottomNavigationViewHelper().disableShiftMode(menuView);
         menuView.setSelectedItemId(R.id.action_schedule);
         menuView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
             Fragment currentFragment = null;
             fragmentTransaction  = fragmentManager.beginTransaction();
             switch (item.getItemId()) {
@@ -50,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.action_schedule:
                     if(selectedFragment != 2){
-                        currentFragment = new ScheduleFragment();
+                        currentFragment = new TimeTableFragment();
                         fragmentTransaction.replace(R.id.fragmentContainer, currentFragment,"ScheduleFragment");
                     }
                     onFragmentChangeAnimation(fragmentTransaction,2);
@@ -78,12 +105,10 @@ public class MainActivity extends AppCompatActivity {
                 //fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 fragmentTransaction.commit();
             }
-
             return true;
             }
-    });
+        });
     }
-
     void onFragmentChangeAnimation(FragmentTransaction fragmentTransaction,int inSelectedFragment){
         switch (inSelectedFragment){
             case 1:

@@ -19,7 +19,6 @@
             android:weightSum="18"
             android:orientation="horizontal"
             android:layout_height="50dp">
-
             <TextView
                 android:id="@+id/tv_day"
                 android:layout_width="1dp"
@@ -30,7 +29,6 @@
                 android:text="ПН"
                 android:textColor="@color/colorPrimaryWhite"
                 android:textSize="17sp" />
-
             <TextView
                 android:id="@+id/tv_countSubjects"
                 android:layout_width="1dp"

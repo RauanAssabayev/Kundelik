@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="wrap_content"
     android:layout_marginRight="20dp"
     android:layout_marginLeft="20dp"
     android:background="@color/colorPrimaryWhite"
@@ -11,13 +11,15 @@
             android:layout_width="match_parent"
             android:weightSum="200"
             android:orientation="horizontal"
-            android:layout_height="120dp">
+            android:layout_height="wrap_content">
             <View
                 android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="3"
+                android:layout_gravity="center_vertical"
                 android:background="@color/colorSecondaryRed" />
             <TextView
                 android:id="@+id/tv_countSubject"
@@ -31,26 +33,29 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="35dp"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@color/colorHintGray" />
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="140"
                 android:weightSum="30"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
                 android:orientation="vertical"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/tv_subject_name"
                     android:layout_width="match_parent"
-                    android:layout_height="33dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="4dp"
                     android:text="История Казахстана"
                     android:gravity="center_vertical"
                     android:textSize="20sp"
                     android:paddingLeft="5dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    />
+                    android:textColor="@color/colorPrimaryRed" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:weightSum="15"
@@ -61,17 +66,18 @@
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:paddingBottom="3dp"
+                        android:paddingTop="5dp"
                         app:srcCompat="@drawable/ic_clock"
                         android:scaleType="centerInside" />
                     <TextView
+                        android:id="@+id/tv_time_from_subject"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="4"
                         android:text="08:00"
                         android:gravity="center_vertical"
                         android:textSize="20sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        />
+                        android:textColor="@color/colorPrimaryDark" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -79,9 +85,7 @@
                         android:text="-"
                         android:gravity="center_vertical"
                         android:textSize="20sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        />
-
+                        android:textColor="@color/colorPrimaryDark" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -89,10 +93,8 @@
                         android:text="10:00"
                         android:gravity="center_vertical"
                         android:textSize="20sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        />
+                        android:textColor="@color/colorPrimaryDark" />
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:weightSum="15"
@@ -102,7 +104,8 @@
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
-                        android:padding="5dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp"
                         app:srcCompat="@drawable/ic_description"
                         android:scaleType="centerInside" />
                     <TextView
@@ -112,17 +115,16 @@
                         android:text="18"
                         android:gravity="center_vertical"
                         android:textSize="20sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        />
+                        android:textColor="@color/colorPrimaryDark" />
                     <ImageView
                         android:id="@+id/iv_ic_attach"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
-                        android:padding="5dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="4dp"
                         app:srcCompat="@drawable/ic_attach"
                         android:scaleType="centerInside" />
-
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -130,16 +132,16 @@
                         android:text="10"
                         android:gravity="center_vertical"
                         android:textSize="20sp"
-                        android:textColor="@color/colorPrimaryDark"
-                        />
+                        android:textColor="@color/colorPrimaryDark" />
                 </LinearLayout>
-            </LinearLayout><ImageView
-            android:id="@+id/iv_ic_e"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="20"
-            app:srcCompat="@drawable/ic_edit_purple"
-            android:scaleType="centerInside" />
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_ic_edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                app:srcCompat="@drawable/ic_edit_purple"
+                android:scaleType="centerInside" />
         </LinearLayout>
     <View
         android:layout_alignBottom="@+id/ml"
@@ -147,6 +149,5 @@
         android:background="@color/colorHintGray"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_height="1dp">
-    </View>
+        android:layout_height="1dp"/>
 </RelativeLayout>

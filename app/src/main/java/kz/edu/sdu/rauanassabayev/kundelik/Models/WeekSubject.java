@@ -4,10 +4,10 @@ package kz.edu.sdu.rauanassabayev.kundelik.Models;
  * Created by rauanassabayev on 9/26/17.
  */
 
-public class DaySubject {
+public class WeekSubject {
     String day;
 
-    public DaySubject(String day, String count) {
+    public WeekSubject(String day, String count) {
         this.day = day;
         this.count = count;
     }
