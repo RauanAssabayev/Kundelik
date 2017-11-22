@@ -139,6 +139,7 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
         }else{
             Log.d("MYLOGS","EMPTY");
         }
+
     }
 
     @OnClick(R.id.ib_addSubject)
