@@ -33,6 +33,7 @@ public class RecyclerViewSwipeHelper extends ItemTouchHelper.Callback {
     public boolean isLongPressDragEnabled() {
         return true;
     }
+
     @Override
     public boolean isItemViewSwipeEnabled() {
         return true;
