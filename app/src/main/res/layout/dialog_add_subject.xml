@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:layout_weight="8"
             android:gravity="center_horizontal|center_vertical"
-            android:text="@string/dg_new_subject"
+            android:text="@string/dialog_select_new_subject"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="22sp" />
         <ImageButton
@@ -41,7 +41,7 @@
             android:textSize="18sp"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginLeft="6dp"
-            android:text="Выберите занятие"/>
+            android:text="@string/dialog_select_subject"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -54,6 +54,26 @@
                 android:layout_height="70dp"
                 android:layout_centerInParent="true"
                 android:popupBackground="@drawable/spinner_bg_main_popup" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_own_subject"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/spinner_bg_main">
+            <EditText
+                android:id="@+id/et_own_subject"
+                android:layout_width="match_parent"
+                android:hint="@string/dialog_add_own_subject"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/bg_drawableleft_own_subject"
+                android:paddingLeft="10dp"
+                android:textSize="14sp"
+                android:background="@android:color/transparent"
+                android:layout_height="match_parent" />
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +93,7 @@
                 android:id="@+id/tv_time_from_subject"
                 android:layout_width="0dp"
                 android:layout_weight="13"
-                android:text="Начало занятия"
+                android:text="@string/dialog_start_time"
                 android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/colorPrimaryDark"
@@ -88,7 +108,7 @@
             <TextView
                 android:id="@+id/tv_start"
                 android:layout_width="match_parent"
-                android:text="@string/fragment.timetable.chooseTime"
+                android:text="@string/fragment_timetable_choose_time"
                 android:gravity="center_vertical"
                 android:drawableLeft="@drawable/bg_dg_drawableleft_clock"
                 android:paddingLeft="10dp"
@@ -99,7 +119,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:popupBackground="@drawable/spinner_bg_main" />
-
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,7 +138,7 @@
                 android:id="@+id/tv_time_to_subject"
                 android:layout_width="0dp"
                 android:layout_weight="13"
-                android:text="Конец занятия"
+                android:text="@string/dialog_finish_time"
                 android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/colorPrimaryDark"
@@ -134,7 +153,7 @@
             <TextView
                 android:id="@+id/tv_finish"
                 android:layout_width="match_parent"
-                android:text="@string/fragment.timetable.chooseTime"
+                android:text="@string/fragment_timetable_choose_time"
                 android:gravity="center_vertical"
                 android:drawableLeft="@drawable/bg_dg_drawableleft_clock"
                 android:paddingLeft="10dp"

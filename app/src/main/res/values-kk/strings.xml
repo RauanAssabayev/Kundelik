@@ -1,14 +1,26 @@
 <resources>
     <string name="app_name">Kundelik</string>
-    <string name="menu_profile">Профиль</string>
+    <string name="menu_profile">Мен</string>
     <string name="menu_schedule">Кесте</string>
     <string name="menu_games">Ойындар</string>
-    <string name="menu_news">Жаналыктар</string>
+    <string name="menu_news">Жаналықтар</string>
     <string name="dg_new_subject">Жаңа сабақ</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dialog_select_start_time">Басталу уақытын таңдаңыз</string>
+    <string name="dialog_select_finish_time">Аяқталу уақытын таңдаңыз</string>
+    <string name="dialog_start_time">Басталу уақыты</string>
+    <string name="dialog_finish_time">Аяқталу уақыты</string>
+    <string name="dialog_select_subject">Сабақты таңдаңыз</string>
+    <string name="dialog_add_own_subject">- Пән атын жазыңыз -</string>
     <string name="schedule_main_text">Сабақ кестесі</string>
     <string name="time_table_main_text">Сабақ кестем</string>
+    <string name="text_add">Қосу</string>
+    <string name="dialog_select_new_subject">Жаңа сабақ</string>
+    <string name="subject_custom">Өзін жазу</string>
+
+
+
     <string name="subject_algebra">Алгебра</string>
     <string name="subject_english">Ағылшын тілі</string>
     <string name="subject_astronomy">Астрономия</string>
@@ -36,15 +48,15 @@
     <string name="subject_self_knowledge">Өзін-өзі тану</string>
     <string name="subject_technology">Технология</string>
     <string name="subject_labor">Еңбек</string>
-    <string name="subject_physical_education">Физическая культура</string>
+    <string name="subject_physics">Физика</string>
     <string name="subject_physical_education">Физическая культура</string>
     <string name="subject_philosophy">Философия</string>
     <string name="subject_chemistry">Химия</string>
     <string name="subject_individual_and_society">Челевок и общество</string>
-    <string name="subject_drawing">Черчение</string>
-    <string name="subject_calligraphy">Чистописание</string>
-    <string name="subject_reading">Чтение</string>
+    <string name="subject_drawing">Сызу</string>
+    <string name="subject_calligraphy">Жазу</string>
+    <string name="subject_reading">Оқу</string>
     <string name="subject_ecology">Экология</string>
     <string name="subject_economy">Экономика</string>
-    <string name="fragment.timetable.chooseTime">- Нажмите, чтобы выбрать -</string>
+    <string name="fragment_timetable_choose_time">- Таңдау ушін басыңыз -</string>
 </resources>

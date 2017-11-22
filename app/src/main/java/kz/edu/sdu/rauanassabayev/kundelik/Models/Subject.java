@@ -22,10 +22,19 @@ public class Subject extends RealmObject {
     private int notesCount;
     private int filesCount;
 
-    public Subject() {
+    public int getIcon() {
+        return icon;
     }
 
-    public Subject createSubject( int day, int number, String name, String timeTo, String timeFrom, int notesCount, int filesCount) {
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
+
+    private int icon;
+
+    public Subject() {}
+
+    public Subject createSubject( int day, int number, String name, String timeTo, String timeFrom, int notesCount, int filesCount,int icon) {
         this.day = day;
         this.number = number;
         this.name = name;
@@ -33,6 +42,7 @@ public class Subject extends RealmObject {
         this.timeFrom = timeFrom;
         this.notesCount = notesCount;
         this.filesCount = filesCount;
+        this.icon = icon;
         return this;
     }
 
@@ -109,6 +119,5 @@ public class Subject extends RealmObject {
     public void setFilesCount(int filesCount) {
         this.filesCount = filesCount;
     }
-
 
 }

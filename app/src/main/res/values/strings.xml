@@ -7,8 +7,20 @@
     <string name="dg_new_subject">Новое занятие</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dialog_select_start_time">Выберите время начало</string>
+    <string name="dialog_select_finish_time">Выберите время завершение</string>
+    <string name="dialog_start_time">Начало занятия</string>
+    <string name="dialog_finish_time">Конец занятия</string>
+    <string name="dialog_select_subject">Выберите занятие</string>
+    <string name="dialog_select_new_subject">Новое занятие</string>
+    <string name="dialog_add_own_subject">- Напишите имя предмета -</string>
+    <string name="text_add">Добавить</string>
     <string name="schedule_main_text">Мое расписание</string>
     <string name="time_table_main_text">Мои занятия</string>
+    <string name="subject_custom">Написать свой</string>
+
+
+
     <string name="subject_algebra">Алгебра</string>
     <string name="subject_english">Английский</string>
     <string name="subject_astronomy">Астрономия</string>
@@ -45,5 +57,6 @@
     <string name="subject_reading">Чтение</string>
     <string name="subject_ecology">Экология</string>
     <string name="subject_economy">Экономика</string>
-    <string name="fragment.timetable.chooseTime">- Нажмите, чтобы выбрать -</string>
+    <string name="fragment_timetable_choose_time">- Нажмите, чтобы выбрать -</string>
+
 </resources>
