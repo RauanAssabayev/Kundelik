@@ -55,6 +55,7 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
     int subjectIcon = R.drawable.ic_subject_custom;
     String fromTime="09:00",toTime = "00:00";
     List<Subject> subjectList = new ArrayList<>();
+    RealmResults<Subject> subjects;
     ArrayList<SpinnerSubjectItem> list;
     @BindView(R.id.tvsFullDay)TextView tvsFullDay;
     @BindView(R.id.tvsScheduleTitle) TextView tvsScheduleTitle;
@@ -63,6 +64,7 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
     @BindView(R.id.ib_addSubject) ImageButton ibAddSubject;
     @BindView(R.id.iv_back) ImageView ivBack;
     private ItemTouchHelper mItemTouchHelper;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_time_table, container, false);
@@ -83,7 +85,8 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
         mAdapter = new TimeTableAdapter(subjectList);
         rvDayTimeTable.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvDayTimeTable.setAdapter(mAdapter);
-        ItemTouchHelper.Callback callback = new RecyclerViewSwipeHelper(mAdapter,getContext());
+
+        ItemTouchHelper.Callback callback = new RecyclerViewSwipeHelper(mAdapter,subjects,getContext());
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(rvDayTimeTable);
 
@@ -118,23 +121,24 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-    void dataChanged(){
+    public void dataChanged()
+    {
         mRealm = Realm.getDefaultInstance();
         mRealm.beginTransaction();
-        RealmResults<Subject> subjects = mRealm.where(Subject.class).findAllSorted("number");
+        subjects = mRealm.where(Subject.class).findAllSorted("number");
         //mRealm.delete(Subject.class);
         subjectList.clear();
         if(!subjects.isEmpty()) {
             for(int i = 0; i < subjects.size(); i++) {
                 subjectList.add(subjects.get(i));
             }
+            mAdapter = new TimeTableAdapter(subjectList);
+            rvDayTimeTable.setLayoutManager(new LinearLayoutManager(getActivity()));
+            rvDayTimeTable.setAdapter(mAdapter);
+            mRealm.commitTransaction();
         }else{
             Log.d("MYLOGS","EMPTY");
         }
-        mAdapter = new TimeTableAdapter(subjectList);
-        rvDayTimeTable.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvDayTimeTable.setAdapter(mAdapter);
-        mRealm.commitTransaction();
     }
 
     @OnClick(R.id.ib_addSubject)

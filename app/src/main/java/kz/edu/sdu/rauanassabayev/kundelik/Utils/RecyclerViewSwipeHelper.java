@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import kz.edu.sdu.rauanassabayev.kundelik.Fragments.TimeTableFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Models.Subject;
 import kz.edu.sdu.rauanassabayev.kundelik.R;
 
@@ -24,16 +25,19 @@ import kz.edu.sdu.rauanassabayev.kundelik.R;
 
 public class RecyclerViewSwipeHelper extends ItemTouchHelper.Callback {
     Context mContext;
+    RealmResults<Subject> mSubjects;
+
     private final RecyclerView.Adapter mAdapter;
-    public RecyclerViewSwipeHelper(RecyclerView.Adapter adapter,Context mContext) {
+
+    public RecyclerViewSwipeHelper(RecyclerView.Adapter adapter,RealmResults<Subject> subjects, Context context) {
         mAdapter = adapter;
-        this.mContext = mContext;
+        mContext = context;
+        mSubjects = subjects;
     }
     @Override
     public boolean isLongPressDragEnabled() {
         return true;
     }
-
     @Override
     public boolean isItemViewSwipeEnabled() {
         return true;
@@ -49,26 +53,39 @@ public class RecyclerViewSwipeHelper extends ItemTouchHelper.Callback {
         mAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
         return true;
     }
+
+
     @Override
     public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+
         AlertDialog alertDialog = new AlertDialog.Builder(mContext).create();
         alertDialog.setTitle("Удаление");
         alertDialog.setMessage("Вы действительно хотите удалить предмет ?");
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Ия",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+
                         Realm mRealm = Realm.getDefaultInstance();
                         mRealm.beginTransaction();
-                        Toast.makeText(mContext,viewHolder.getPosition()+"",Toast.LENGTH_SHORT).show();
-                        RealmResults<Subject> row = mRealm.where(Subject.class).equalTo("number",viewHolder.getPosition()+1).findAll();
-                        row.deleteFirstFromRealm();
-                        mRealm.commitTransaction();
-                        mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                        RealmResults<Subject> subject = mRealm.where(Subject.class).equalTo("id",mSubjects.get(viewHolder.getPosition()).getId()+"").findAll();
+                        if (subject == null) {
+                            mRealm.cancelTransaction();
+                            return;
+                        }else {
+                            subject.deleteFirstFromRealm();
+                            mRealm.commitTransaction();
+                            mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                            new TimeTableFragment().dataChanged();
+                        }
+
+                        //Toast.makeText(mContext,mSubjects.get(viewHolder.getPosition()).getId(),Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });
         alertDialog.show();
+
     }
+
     Drawable background;
     Drawable xMark;
     int xMarkMargin;
