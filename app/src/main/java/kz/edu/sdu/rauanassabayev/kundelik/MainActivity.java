@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     int selectedFragment = 2;
-    Realm mRealm;
 
     @Override
     protected void onStart() {
@@ -35,29 +34,26 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         Resources res = getApplicationContext().getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         android.content.res.Configuration conf = res.getConfiguration();
         conf.locale = new Locale("kk");
         res.updateConfiguration(conf, dm);
-
-
 //        Intent refresh = new Intent(MainActivity.this, MainActivity.class);
 //        startActivity(refresh);
 //        finish();
 
         setContentView(R.layout.activity_main);
-        Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration.Builder().name(Realm.DEFAULT_REALM_NAME).deleteRealmIfMigrationNeeded().build();
-        Realm.setDefaultConfiguration(config);
+
 //        mRealm = Realm.getDefaultInstance();
 //        mRealm.beginTransaction();
 //        mRealm.delete(Subject.class);
 //        mRealm.commitTransaction();
 
         BottomNavigationView menuView = findViewById(R.id.bottom_navigation);
+
         if(savedInstanceState == null){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();

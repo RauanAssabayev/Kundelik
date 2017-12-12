@@ -3,6 +3,8 @@ package kz.edu.sdu.rauanassabayev.kundelik.Fragments;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -47,14 +49,15 @@ import kz.edu.sdu.rauanassabayev.kundelik.R;
 import kz.edu.sdu.rauanassabayev.kundelik.Utils.MyApplication;
 import kz.edu.sdu.rauanassabayev.kundelik.Utils.RecyclerViewSwipeHelper;
 
-public class TimeTableFragment extends Fragment implements View.OnClickListener {
+import static android.content.Context.MODE_PRIVATE;
+
+public class TimeTableFragment extends Fragment{
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Realm mRealm;
     String subjectName = "";
-    int subjectIcon = R.drawable.ic_subject_custom;
-    String fromTime="09:00",toTime = "00:00";
-    List<Subject> subjectList = new ArrayList<>();
+    String subjectIcon = "";
+    String fromTime="",toTime = "";
     RealmResults<Subject> subjects;
     ArrayList<SpinnerSubjectItem> list;
     @BindView(R.id.tvsFullDay)TextView tvsFullDay;
@@ -64,6 +67,7 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
     @BindView(R.id.ib_addSubject) ImageButton ibAddSubject;
     @BindView(R.id.iv_back) ImageView ivBack;
     private ItemTouchHelper mItemTouchHelper;
+    int selectedDay = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -79,28 +83,23 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
         rvDayTimeTable.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         rvDayTimeTable.setLayoutManager(mLayoutManager);
-        mRealm = Realm.getDefaultInstance();
-        dataChanged();
-
-        mAdapter = new TimeTableAdapter(subjectList);
-        rvDayTimeTable.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvDayTimeTable.setAdapter(mAdapter);
-
-        ItemTouchHelper.Callback callback = new RecyclerViewSwipeHelper(mAdapter,subjects,getContext());
-        mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(rvDayTimeTable);
-
         Typeface fontComfortaaRegular = Typeface.createFromAsset(getActivity().getAssets(), "Comfortaa-Regular.ttf");
         tvsFullDay.setTypeface(fontComfortaaRegular);
         Typeface fontComfotaaBold = Typeface.createFromAsset(getActivity().getAssets(), "Comfortaa-Bold.ttf");
-
         tvsScheduleTitle.setTypeface(fontComfotaaBold);
         tvDayOfSubject.setTypeface(fontComfotaaBold);
         setMainDate(tvsFullDay);
         setMainDate(tvDayOfSubject);
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("DEFAULT_PREFS", MODE_PRIVATE);
+        selectedDay = prefs.getInt("day", -1);
+        dataChanged();
+
+
     }
 
     private void setMainDate(TextView tv) {
+
         Calendar mCalendar= Calendar.getInstance();
         String month = mCalendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         String dayweek = mCalendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
@@ -108,42 +107,41 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
         month = month.substring(0, 1).toUpperCase() + month.substring(1);
         dayweek   = dayweek.substring(0, 1).toUpperCase() + dayweek.substring(1);
         tv.setText(dayweek+", "+day+" "+month);
+
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.iv_back:
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentContainer, new ScheduleFragment(), "ScheduleFragment");
-                ft.commit();
-            default:break;
-        }
-    }
+    public void dataChanged() {
 
-    public void dataChanged()
-    {
         mRealm = Realm.getDefaultInstance();
         mRealm.beginTransaction();
-        subjects = mRealm.where(Subject.class).findAllSorted("number");
+        subjects = mRealm.where(Subject.class).equalTo("day",selectedDay).findAllSorted("number");
         //mRealm.delete(Subject.class);
-        subjectList.clear();
         if(!subjects.isEmpty()) {
-            for(int i = 0; i < subjects.size(); i++) {
-                subjectList.add(subjects.get(i));
-            }
-            mAdapter = new TimeTableAdapter(subjectList);
-            rvDayTimeTable.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+            mAdapter = new TimeTableAdapter(subjects);
+            rvDayTimeTable.setLayoutManager(new LinearLayoutManager(getContext()));
             rvDayTimeTable.setAdapter(mAdapter);
             mRealm.commitTransaction();
+            ItemTouchHelper.Callback callback = new RecyclerViewSwipeHelper(rvDayTimeTable,mAdapter,subjects,getContext(),getActivity());
+            mItemTouchHelper = new ItemTouchHelper(callback);
+            mItemTouchHelper.attachToRecyclerView(rvDayTimeTable);
+
         }else{
             Log.d("MYLOGS","EMPTY");
+            mRealm.cancelTransaction();
         }
+    }
 
+    @OnClick(R.id.iv_back)
+    void backToShedule(){
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.fragmentContainer, new ScheduleFragment(), "ScheduleFragment");
+        ft.commit();
     }
 
     @OnClick(R.id.ib_addSubject)
     void addSubjectDialog(){
+
         final Typeface fontComfortaaRegular  = Typeface.createFromAsset(getActivity().getAssets(), "Comfortaa-Regular.ttf");
         Typeface fontComfotaaBold            = Typeface.createFromAsset(getActivity().getAssets(), "Comfortaa-Bold.ttf");
         AlertDialog.Builder dialogBuilder    = new AlertDialog.Builder(getContext());
@@ -159,13 +157,15 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
         Button btAddSubject                  = dialogView.findViewById(R.id.bt_add_subject);
         final  Spinner spSelectSubject       = dialogView.findViewById(R.id.sp_select_subject);
         final  RelativeLayout rl_own_subject = dialogView.findViewById(R.id.rl_own_subject);
-        final  EditText et_own_subject = dialogView.findViewById(R.id.et_own_subject);
+        final  EditText etOwnSubject         = dialogView.findViewById(R.id.et_own_subject);
         rl_own_subject.setVisibility(View.GONE);
+
         if(Build.VERSION.SDK_INT<22) {
             tvStart.setCompoundDrawables(null, null, null, null);
             tvFinish.setCompoundDrawables(null, null, null, null);
-            et_own_subject.setCompoundDrawables(null, null, null, null);
+            etOwnSubject.setCompoundDrawables(null, null, null, null);
         }
+
         tvNewSubject.setTypeface(fontComfotaaBold);
         tvSelectSubject.setTypeface(fontComfortaaRegular);
         tvTimeFromSubject.setTypeface(fontComfortaaRegular);
@@ -179,19 +179,25 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
         spSelectSubject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if(position == 1){
+                if(position == 0){
+                    subjectName = "-1";
+                }
+                else if(position == 1){
                     rl_own_subject.setVisibility(View.VISIBLE);
-                    et_own_subject.setTypeface(fontComfortaaRegular);
-                    et_own_subject.requestFocus();
+                    etOwnSubject.setTypeface(fontComfortaaRegular);
+                    etOwnSubject.requestFocus();
+                    subjectName = "-1";
+                    subjectIcon = getResources().getResourceEntryName(list.get(position).getImageId());
                 }else{
                     rl_own_subject.setVisibility(View.GONE);
                     subjectName = list.get(position).getText();
-                    subjectIcon = list.get(position).getImageId();
+                    subjectIcon = getResources().getResourceEntryName(list.get(position).getImageId());
                 }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
+
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
         ibCloseNewSubject.setOnClickListener(new View.OnClickListener() {
@@ -200,35 +206,42 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
                 alertDialog.cancel();
             }
         });
+
         btAddSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int selectedDay;
-                Bundle extras = getActivity().getIntent().getExtras();
-                if(extras == null) {
-                    selectedDay = 0;
-                } else {
-                    selectedDay = extras.getInt("selectedDay");
-                }
                 Calendar calendar = Calendar.getInstance();
                 int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
-                int day = selectedDay + currentDay;
-                Toast.makeText(getActivity().getApplicationContext(),day+"",Toast.LENGTH_LONG).show();
                 try {
-                    mRealm.beginTransaction();
-                    Subject subject = mRealm.createObject(Subject.class, UUID.randomUUID().toString());
-                    subject.createSubject(0,subjectList.size()+1,subjectName,toTime,fromTime,0,0,subjectIcon);
-                    mRealm.commitTransaction();
-                    dataChanged();
-                    //mAdapter.notifyDataSetChanged();
-                    mAdapter = new TimeTableAdapter(subjectList);
-                    rvDayTimeTable.setAdapter(mAdapter);
+                    if(toTime.equals("") || fromTime.equals("") || subjectName.equals("")) {
+                        Toast.makeText(getContext(),"Необходимо заполнить все поля формы!",Toast.LENGTH_LONG).show();
+                    }else if(subjectName.equals("-1") && etOwnSubject.getText().toString().equals("")){
+                        Toast.makeText(getContext(),"Необходимо заполнить все поля формы!",Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        if(subjectName.equals("-1")){
+                            subjectName = etOwnSubject.getText().toString();
+                        }
+                        mRealm.beginTransaction();
+                        Subject subject = mRealm.createObject(Subject.class, UUID.randomUUID().toString());
+                        int i = 1;
+                        if(selectedDay == 0)i = 0;
+                        subject.createSubject(selectedDay,subjects.size() + i,subjectName,toTime,fromTime,0,0,subjectIcon);
+                        mRealm.commitTransaction();
+                        dataChanged();
+                        subjectName = "";
+                        toTime = "";
+                        fromTime = "";
+                        alertDialog.cancel();
+                    }
                 } finally {}
-                alertDialog.cancel();
+
             }
         });
+
         tvStart.bringToFront();
         tvStart.setTypeface(fontComfortaaRegular);
+
         tvStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -247,8 +260,10 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
                 mTimePicker.show();
             }
         });
+
         tvFinish.bringToFront();
         tvFinish.setTypeface(fontComfortaaRegular);
+
         tvFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -267,5 +282,7 @@ public class TimeTableFragment extends Fragment implements View.OnClickListener 
                 mTimePicker.show();
             }
         });
+
+
     }
 }

@@ -21,20 +21,21 @@ public class Subject extends RealmObject {
     private String timeFrom;
     private int notesCount;
     private int filesCount;
+    private String icon;
 
-    public int getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(int icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 
-    private int icon;
+
 
     public Subject() {}
 
-    public Subject createSubject( int day, int number, String name, String timeTo, String timeFrom, int notesCount, int filesCount,int icon) {
+    public Subject createSubject( int day, int number, String name, String timeTo, String timeFrom, int notesCount, int filesCount,String icon) {
         this.day = day;
         this.number = number;
         this.name = name;

@@ -1,5 +1,6 @@
 package kz.edu.sdu.rauanassabayev.kundelik.Fragments;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,6 +26,8 @@ import kz.edu.sdu.rauanassabayev.kundelik.Adapters.DaySubjectsAdapter;
 import kz.edu.sdu.rauanassabayev.kundelik.Models.WeekSubject;
 import kz.edu.sdu.rauanassabayev.kundelik.R;
 import kz.edu.sdu.rauanassabayev.kundelik.Utils.RecyclerItemClickListener;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class ScheduleFragment extends Fragment {
 
@@ -74,6 +77,9 @@ public class ScheduleFragment extends Fragment {
                 new RecyclerItemClickListener(getContext(), rvDaySubjects  ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
                         final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        SharedPreferences.Editor editor = getActivity().getSharedPreferences("DEFAULT_PREFS", MODE_PRIVATE).edit();
+                        editor.putInt("day", position);
+                        editor.apply();
                         ft.replace(R.id.fragmentContainer, new TimeTableFragment(), "GameFragment");
                         ft.commit();
                     }

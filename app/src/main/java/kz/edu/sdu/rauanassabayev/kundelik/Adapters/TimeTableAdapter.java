@@ -4,8 +4,14 @@ package kz.edu.sdu.rauanassabayev.kundelik.Adapters;
  * Created by rauanassabayev on 9/26/17.
  */
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,13 +22,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
+
+import kz.edu.sdu.rauanassabayev.kundelik.Fragments.AddHWFragment;
+import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ScheduleFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Models.Subject;
 import kz.edu.sdu.rauanassabayev.kundelik.R;
+import kz.edu.sdu.rauanassabayev.kundelik.Utils.MyApplication;
 
-public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyViewHolder>  {
+public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyViewHolder> {
+
     private List<Subject> dataSet;
     Typeface fontComfortaaRegular;
     Typeface fontComfotaaBold;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+    Context context;
+
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_time_from_subject,tv_time_to_subject,tv_countSubjects,tv_subject_name,tv_notes_count,tv_attach_count;
         ImageView iv_ic_edit,iv_subject_icon;
@@ -48,15 +63,17 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
 
     @Override
     public MyViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+        context = parent.getContext();
         final View mainview = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_subjects, parent, false);
         fontComfortaaRegular = Typeface.createFromAsset(parent.getContext().getAssets(), "Comfortaa-Regular.ttf");
         fontComfotaaBold = Typeface.createFromAsset(parent.getContext().getAssets(), "Comfortaa-Bold.ttf");
         MyViewHolder myViewHolder = new MyViewHolder(mainview);
         return myViewHolder;
+
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder,int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         TextView tv_countSubjects     = holder.tv_countSubjects;
         TextView tv_time_from_subject = holder.tv_time_from_subject;
@@ -71,9 +88,22 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
         iv_ic_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"WORKS",Toast.LENGTH_LONG).show();
+                Bundle bundle=new Bundle();
+                bundle.putString("subjectName", dataSet.get(position).getName());
+                AddHWFragment HWFragment=new AddHWFragment();
+                HWFragment.setArguments(bundle);
+                fragmentManager = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(
+                        R.anim.flip_right_in,
+                        R.anim.flip_right_out,
+                        R.anim.flip_left_in,
+                        R.anim.flip_left_out);
+                fragmentTransaction.replace(R.id.fragmentContainer,HWFragment);
+                fragmentTransaction.commit();
             }
         });
+
         ll_action_subject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,7 +132,10 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
         tv_attach_count.setText(dataSet.get(position).getFilesCount()+"");
         tv_attach_count.setTypeface(fontComfortaaRegular);
         tv_notes_count.setTypeface(fontComfortaaRegular);
-        iv_subject_icon.setImageResource(dataSet.get(position).getIcon());
+
+        int resId = context.getResources().getIdentifier(dataSet.get(position).getIcon(), "drawable", context.getPackageName());
+        iv_subject_icon.setImageResource(resId);
+
     }
 
     @Override

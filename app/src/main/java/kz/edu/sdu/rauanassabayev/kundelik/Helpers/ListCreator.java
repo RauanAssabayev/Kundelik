@@ -23,7 +23,7 @@ public class ListCreator {
         list.add(new SpinnerSubjectItem(context.getString(R.string.subject_biology),R.drawable.ic_subject_biology));
         list.add(new SpinnerSubjectItem(context.getString(R.string.subject_world_history),R.drawable.ic_subject_world_history));
         list.add(new SpinnerSubjectItem(context.getString(R.string.subject_geography),R.drawable.ic_subject_geography));
-        list.add(new SpinnerSubjectItem(context.getString(R.string.subject_geography),R.drawable.ic_subject_geometry));
+        list.add(new SpinnerSubjectItem(context.getString(R.string.subject_geometry),R.drawable.ic_subject_geometry));
         list.add(new SpinnerSubjectItem(context.getString(R.string.subject_natural_science),R.drawable.ic_subject_natural_science));
         list.add(new SpinnerSubjectItem(context.getString(R.string.subject_informatics),R.drawable.ic_subject_informatics));
         list.add(new SpinnerSubjectItem(context.getString(R.string.subject_history_of_kazakhstan),R.drawable.ic_subject_history_of_kazakhstan));

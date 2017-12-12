@@ -28,8 +28,8 @@ public class DaySubjectsAdapter extends RecyclerView.Adapter<DaySubjectsAdapter.
             super(itemView);
             this.tv_day           = (TextView) itemView.findViewById(R.id.tv_day);
             this.tv_countSubjects = (TextView) itemView.findViewById(R.id.tv_countSubjects);
-            vLeftLine             = (View) itemView.findViewById(R.id.vLeftLine);
-            vRightLine            = (View) itemView.findViewById(R.id.vRightLine);
+            vLeftLine             = (View)     itemView.findViewById(R.id.vLeftLine);
+            vRightLine            = (View)     itemView.findViewById(R.id.vRightLine);
         }
     }
     public DaySubjectsAdapter(List<WeekSubject> dataModels) {
