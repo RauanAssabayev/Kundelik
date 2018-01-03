@@ -132,7 +132,7 @@
                         android:textSize="20sp"
                         android:textColor="@color/colorPrimaryDark" />
                     <ImageView
-                        android:id="@+id/iv_ic_attach"
+                        android:id="@+id/iv_ic_grades"
                         android:layout_width="33dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"

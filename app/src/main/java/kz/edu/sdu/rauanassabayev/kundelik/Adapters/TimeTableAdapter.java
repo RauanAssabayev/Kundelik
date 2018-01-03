@@ -6,10 +6,8 @@ package kz.edu.sdu.rauanassabayev.kundelik.Adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -20,14 +18,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.util.List;
-
-import kz.edu.sdu.rauanassabayev.kundelik.Fragments.AddHWFragment;
-import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ScheduleFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Models.Subject;
 import kz.edu.sdu.rauanassabayev.kundelik.R;
-import kz.edu.sdu.rauanassabayev.kundelik.Utils.MyApplication;
+import kz.edu.sdu.rauanassabayev.kundelik.SubjectExtraActivity;
 
 public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyViewHolder> {
 
@@ -69,7 +63,6 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
         fontComfotaaBold = Typeface.createFromAsset(parent.getContext().getAssets(), "Comfortaa-Bold.ttf");
         MyViewHolder myViewHolder = new MyViewHolder(mainview);
         return myViewHolder;
-
     }
 
     @Override
@@ -88,19 +81,23 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
         iv_ic_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putString("subjectName", dataSet.get(position).getName());
-                AddHWFragment HWFragment=new AddHWFragment();
-                HWFragment.setArguments(bundle);
-                fragmentManager = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.setCustomAnimations(
-                        R.anim.flip_right_in,
-                        R.anim.flip_right_out,
-                        R.anim.flip_left_in,
-                        R.anim.flip_left_out);
-                fragmentTransaction.replace(R.id.fragmentContainer,HWFragment);
-                fragmentTransaction.commit();
+//                Bundle bundle=new Bundle();
+//                bundle.putString("subjectName", dataSet.get(position).getName());
+//                AddHWFragment HWFragment=new AddHWFragment();
+//                HWFragment.setArguments(bundle);
+//                fragmentManager = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.setCustomAnimations(
+//                        R.anim.flip_right_in,
+//                        R.anim.flip_right_out,
+//                        R.anim.flip_left_in,
+//                        R.anim.flip_left_out);
+//                fragmentTransaction.replace(R.id.fragmentContainer,HWFragment);
+//                fragmentTransaction.commit();
+
+                Intent intent = new Intent(context, SubjectExtraActivity.class);
+                intent.putExtra("subjectName",dataSet.get(position).getName());
+                context.startActivity(intent);
             }
         });
 
@@ -119,6 +116,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
                 alertDialog.show();
             }
         });
+
 
         tv_countSubjects.setText(dataSet.get(position).getNumber()+"");
         tv_countSubjects.setTypeface(fontComfortaaRegular);

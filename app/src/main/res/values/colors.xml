@@ -11,6 +11,8 @@
     <color name="colorPrimaryBlue">#00B</color>
     <color name="colorSecondaryRed">#FF6B6B</color>
     <color name="colorSecondaryGray">#F6F6F6</color>
+    <color name="colorPrimaryGray">#EFF0F1</color>
+    <color name="colorSecondaryBlack">#3B4045</color>
 </resources>
 
 

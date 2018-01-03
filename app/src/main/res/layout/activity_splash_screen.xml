@@ -6,5 +6,4 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_splash"
     tools:context="kz.edu.sdu.rauanassabayev.kundelik.SplashScreenActivity">
-
 </android.support.constraint.ConstraintLayout>
