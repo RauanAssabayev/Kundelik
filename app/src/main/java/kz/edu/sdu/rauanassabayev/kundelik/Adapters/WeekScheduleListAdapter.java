@@ -10,34 +10,40 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.List;
 
-import kz.edu.sdu.rauanassabayev.kundelik.Models.WeekSubject;
+import kz.edu.sdu.rauanassabayev.kundelik.Models.WeekScheduleItem;
 import kz.edu.sdu.rauanassabayev.kundelik.R;
+import kz.edu.sdu.rauanassabayev.kundelik.Utils.MyApplication;
 
-public class DaySubjectsAdapter extends RecyclerView.Adapter<DaySubjectsAdapter.MyViewHolder>{
-    private List<WeekSubject> dataSet;
+public class WeekScheduleListAdapter extends RecyclerView.Adapter<WeekScheduleListAdapter.MyViewHolder>{
+    private List<WeekScheduleItem> dataSet;
+    View mainview;
     Typeface fontComfortaaRegular;
     Typeface fontComfotaaBold;
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_day,tv_countSubjects;
         View vLeftLine,vRightLine;
+        ImageView ivArrowRight;
         public MyViewHolder(View itemView) {
             super(itemView);
             this.tv_day           = (TextView) itemView.findViewById(R.id.tv_day);
             this.tv_countSubjects = (TextView) itemView.findViewById(R.id.tv_countSubjects);
             vLeftLine             = (View)     itemView.findViewById(R.id.vLeftLine);
             vRightLine            = (View)     itemView.findViewById(R.id.vRightLine);
+            ivArrowRight          = (ImageView)itemView.findViewById(R.id.iv_arrow_right);
         }
     }
-    public DaySubjectsAdapter(List<WeekSubject> dataModels) {
+    public WeekScheduleListAdapter(List<WeekScheduleItem> dataModels) {
         this.dataSet = dataModels;
     }
     @Override
     public MyViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
-        final View mainview = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_day_subjects, parent, false);
+        mainview = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_day_subjects, parent, false);
         fontComfortaaRegular = Typeface.createFromAsset(parent.getContext().getAssets(), "Comfortaa-Regular.ttf");
         fontComfotaaBold = Typeface.createFromAsset(parent.getContext().getAssets(), "Comfortaa-Bold.ttf");
         MyViewHolder myViewHolder = new MyViewHolder(mainview);
@@ -54,10 +60,22 @@ public class DaySubjectsAdapter extends RecyclerView.Adapter<DaySubjectsAdapter.
             tv_countSubjects.setPadding(0,15,0,0);
             tv_day.setPadding(0,15,0,0);
         }
+
         tv_day.setTypeface(fontComfotaaBold);
         tv_countSubjects.setTypeface(fontComfortaaRegular);
         tv_day.setText(dataSet.get(position).getDay());
         tv_countSubjects.setText(dataSet.get(position).getCount()+" занятий");
+
+        if(dataSet.get(position).getCount().equals("0")){
+            tv_countSubjects.setText("Нет занятий");
+        }
+
+
+        if(position == (Calendar.getInstance()).get(Calendar.DAY_OF_WEEK)-2){
+            tv_countSubjects.setBackgroundColor(mainview.getResources().getColor(R.color.colorLightPrimary));
+            holder.ivArrowRight.setBackgroundColor(mainview.getResources().getColor(R.color.colorLightPrimary));
+        }
+
         if(position == dataSet.size() - 1){
             View vLeftLine = holder.vLeftLine;
             View vRightLine = holder.vRightLine;

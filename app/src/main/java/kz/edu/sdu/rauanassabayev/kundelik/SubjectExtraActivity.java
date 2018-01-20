@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import kz.edu.sdu.rauanassabayev.kundelik.Adapters.ViewPagerAdapter;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.AddHWFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.AddGradeFragment;
+import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ListHWFragment;
 
 public class SubjectExtraActivity extends AppCompatActivity {
 
@@ -23,8 +24,11 @@ public class SubjectExtraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_extra);
         ButterKnife.bind(this);
+
         Typeface fontComfortaaRegular = Typeface.createFromAsset(getAssets(), "Comfortaa-Regular.ttf");
-        setupViewPager(vpSubjectActions);
+
+        if(getIntent().getExtras().getString("action").equals("list")) setupViewPagerList(vpSubjectActions);
+        else setupViewPagerAdd(vpSubjectActions);
 
         tlSubjectActions.setupWithViewPager(vpSubjectActions);
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
@@ -35,11 +39,21 @@ public class SubjectExtraActivity extends AppCompatActivity {
         tabTwo.setText("Оценки");
         tabTwo.setTypeface(fontComfortaaRegular);
         tlSubjectActions.getTabAt(1).setCustomView(tabTwo);
+
+
+
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPagerAdd(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new AddHWFragment(),"Задачи");
+        adapter.addFrag(new AddGradeFragment(),"Оценки");
+        viewPager.setAdapter(adapter);
+    }
+
+    private void setupViewPagerList(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new ListHWFragment(),"Задачи");
         adapter.addFrag(new AddGradeFragment(),"Оценки");
         viewPager.setAdapter(adapter);
     }

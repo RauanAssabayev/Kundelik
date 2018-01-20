@@ -10,12 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 import java.util.Locale;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.GameFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.NewsFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ProfileFragment;
-import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ScheduleFragment;
+import kz.edu.sdu.rauanassabayev.kundelik.Fragments.WeekScheduleListFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Utils.BottomNavigationViewHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         Resources res = getApplicationContext().getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState == null){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.fragmentContainer, new ScheduleFragment());
+            fragmentTransaction.add(R.id.fragmentContainer, new WeekScheduleListFragment());
             fragmentTransaction.commit();
         }
         new BottomNavigationViewHelper().disableShiftMode(menuView);
@@ -62,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.fragmentContainer, currentFragment,"ProfileFragment");
                     break;
                 case R.id.action_schedule:
-                    currentFragment = new ScheduleFragment();
-                    fragmentTransaction.replace(R.id.fragmentContainer, currentFragment,"ScheduleFragment");
+                    currentFragment = new WeekScheduleListFragment();
+                    fragmentTransaction.replace(R.id.fragmentContainer, currentFragment,"WeekScheduleListFragment");
                     break;
                 case R.id.action_game:
                     currentFragment = new GameFragment();

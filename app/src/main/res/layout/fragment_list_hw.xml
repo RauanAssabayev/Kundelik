@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+    <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:id="@+id/tv_subject_name"
+            android:paddingTop="10dp"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_horizontal"
+            android:textSize="20sp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/colorAccent"
+            android:text="@string/subject_history_of_kazakhstan" />
+        <TextView
+            android:id="@+id/tv_stc_grade"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#f6f6f6"
+            android:text="ДЗ по предмету"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="#858585"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:background="@android:color/white"
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+    </LinearLayout>
+</RelativeLayout>

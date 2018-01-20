@@ -13,6 +13,7 @@
     <color name="colorSecondaryGray">#F6F6F6</color>
     <color name="colorPrimaryGray">#EFF0F1</color>
     <color name="colorSecondaryBlack">#3B4045</color>
+    <color name="colorLightPrimary">#F1FFFE</color>
 </resources>
 
 

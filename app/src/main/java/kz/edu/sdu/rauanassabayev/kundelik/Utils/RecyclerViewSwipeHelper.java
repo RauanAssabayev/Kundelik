@@ -18,7 +18,7 @@ import android.view.View;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
-import kz.edu.sdu.rauanassabayev.kundelik.Adapters.TimeTableAdapter;
+import kz.edu.sdu.rauanassabayev.kundelik.Adapters.ScheduleAdapter;
 import kz.edu.sdu.rauanassabayev.kundelik.Models.Subject;
 import kz.edu.sdu.rauanassabayev.kundelik.R;
 
@@ -116,7 +116,7 @@ public class RecyclerViewSwipeHelper extends ItemTouchHelper.Callback {
         mRealm.beginTransaction();
         RealmResults<Subject> subjects = mRealm.where(Subject.class).equalTo("day",selectedDay).findAllSorted("number");
         if(!subjects.isEmpty()) {
-            mAdapter = new TimeTableAdapter(subjects);
+            mAdapter = new ScheduleAdapter(subjects);
             mRealm.commitTransaction();
             mrv.setAdapter(mAdapter);
         }else{

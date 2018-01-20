@@ -4,6 +4,7 @@ package kz.edu.sdu.rauanassabayev.kundelik.Adapters;
  * Created by rauanassabayev on 9/26/17.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +12,9 @@ import android.graphics.Typeface;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +22,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.List;
+import io.realm.Realm;
+import io.realm.RealmResults;
+import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ListHWFragment;
+import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ScheduleFragment;
+import kz.edu.sdu.rauanassabayev.kundelik.Helpers.FontFactory;
+import kz.edu.sdu.rauanassabayev.kundelik.Models.HomeWork;
 import kz.edu.sdu.rauanassabayev.kundelik.Models.Subject;
 import kz.edu.sdu.rauanassabayev.kundelik.R;
 import kz.edu.sdu.rauanassabayev.kundelik.SubjectExtraActivity;
 
-public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyViewHolder> {
+
+public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyViewHolder> {
+
+    private final String TAG = "ScheduleAdapter";
 
     private List<Subject> dataSet;
     Typeface fontComfortaaRegular;
@@ -51,7 +63,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
         }
     }
 
-    public TimeTableAdapter(List<Subject> dataModels) {
+    public ScheduleAdapter(List<Subject> dataModels) {
         this.dataSet = dataModels;
     }
 
@@ -59,8 +71,8 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
     public MyViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         context = parent.getContext();
         final View mainview = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_subjects, parent, false);
-        fontComfortaaRegular = Typeface.createFromAsset(parent.getContext().getAssets(), "Comfortaa-Regular.ttf");
-        fontComfotaaBold = Typeface.createFromAsset(parent.getContext().getAssets(), "Comfortaa-Bold.ttf");
+        fontComfortaaRegular = FontFactory.getInstance().getFont((Activity) (parent.getContext()),"Comfortaa-Regular.ttf");
+        fontComfotaaBold     = FontFactory.getInstance().getFont((Activity) (parent.getContext()), "Comfortaa-Bold.ttf");
         MyViewHolder myViewHolder = new MyViewHolder(mainview);
         return myViewHolder;
     }
@@ -96,6 +108,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
 //                fragmentTransaction.commit();
 
                 Intent intent = new Intent(context, SubjectExtraActivity.class);
+                intent.putExtra("action","add");
                 intent.putExtra("subjectName",dataSet.get(position).getName());
                 context.startActivity(intent);
             }
@@ -104,16 +117,13 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
         ll_action_subject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog alertDialog = new AlertDialog.Builder(view.getContext()).create();
-                alertDialog.setTitle("Alert");
-                alertDialog.setMessage("Alert message to be shown");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();
+//                final FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+//                ft.replace(R.id.fragmentContainer, new ListHWFragment(), "WeekScheduleListFragment");
+//                ft.commit();
+                  Intent intent = new Intent(context,SubjectExtraActivity.class);
+                  intent.putExtra("action","list");
+                  intent.putExtra("subjectName",dataSet.get(position).getName());
+                  context.startActivity(intent);
             }
         });
 
@@ -127,12 +137,13 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.MyVi
         tv_subject_name.setText(dataSet.get(position).getName());
         tv_subject_name.setTypeface(fontComfortaaRegular);
         tv_notes_count.setText(dataSet.get(position).getNotesCount()+"");
-        tv_attach_count.setText(dataSet.get(position).getFilesCount()+"");
+        tv_attach_count.setText(dataSet.get(position).getAvgGrades()+"");
         tv_attach_count.setTypeface(fontComfortaaRegular);
         tv_notes_count.setTypeface(fontComfortaaRegular);
 
         int resId = context.getResources().getIdentifier(dataSet.get(position).getIcon(), "drawable", context.getPackageName());
         iv_subject_icon.setImageResource(resId);
+
 
     }
 

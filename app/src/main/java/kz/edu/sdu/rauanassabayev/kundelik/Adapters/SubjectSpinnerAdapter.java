@@ -21,8 +21,7 @@ public class SubjectSpinnerAdapter extends ArrayAdapter<SpinnerSubjectItem> {
     Activity context;
     ArrayList<SpinnerSubjectItem> list;
     LayoutInflater inflater;
-    public SubjectSpinnerAdapter(Activity context, int groupid, int id, ArrayList<SpinnerSubjectItem>
-            list){
+    public SubjectSpinnerAdapter(Activity context, int groupid, int id, ArrayList<SpinnerSubjectItem> list){
         super(context,id,list);
         this.list=list;
         inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

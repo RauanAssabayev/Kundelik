@@ -20,7 +20,10 @@ public class Subject extends RealmObject {
     @Required
     private String timeFrom;
     private int notesCount;
-    private int filesCount;
+
+
+
+    private float avgGrades;
     private String icon;
 
     public String getIcon() {
@@ -35,14 +38,14 @@ public class Subject extends RealmObject {
 
     public Subject() {}
 
-    public Subject createSubject( int day, int number, String name, String timeTo, String timeFrom, int notesCount, int filesCount,String icon) {
+    public Subject createSubject( int day, int number, String name, String timeTo, String timeFrom, int notesCount, float avgGrades,String icon) {
         this.day = day;
         this.number = number;
         this.name = name;
         this.timeTo = timeTo;
         this.timeFrom = timeFrom;
         this.notesCount = notesCount;
-        this.filesCount = filesCount;
+        this.avgGrades = avgGrades;
         this.icon = icon;
         return this;
     }
@@ -54,7 +57,7 @@ public class Subject extends RealmObject {
         this.timeTo = timeTo;
         this.timeFrom = timeFrom;
         this.notesCount = notesCount;
-        this.filesCount = filesCount;
+        this.avgGrades = avgGrades;
     }
 
     public String getId() {
@@ -113,12 +116,8 @@ public class Subject extends RealmObject {
         this.notesCount = notesCount;
     }
 
-    public int getFilesCount() {
-        return filesCount;
-    }
+    public float getAvgGrades() {return avgGrades;}
 
-    public void setFilesCount(int filesCount) {
-        this.filesCount = filesCount;
-    }
+    public void setAvgGrades(float avgGrades) {this.avgGrades = avgGrades;}
 
 }

@@ -1,4 +1,6 @@
 package kz.edu.sdu.rauanassabayev.kundelik.Fragments;
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import kz.edu.sdu.rauanassabayev.kundelik.Helpers.FontFactory;
 import kz.edu.sdu.rauanassabayev.kundelik.R;
 
 /**
@@ -29,6 +34,7 @@ public class AddGradeFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.bt_grade3)Button btGrade3;
     @BindView(R.id.bt_grade4)Button btGrade4;
     @BindView(R.id.bt_grade5)Button btGrade5;
+    Button selectedGrade;
     public AddGradeFragment() {}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,7 +46,9 @@ public class AddGradeFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         String subjectName = getActivity().getIntent().getExtras().getString("subjectName");
-        Typeface fontComfortaaRegular = Typeface.createFromAsset(getActivity().getAssets(), "Comfortaa-Regular.ttf");
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        final Typeface fontComfortaaRegular  = FontFactory.getInstance().getFont(getActivity(),"Comfortaa-Regular.ttf");
+
         tvSubjectName.setText(subjectName);
         tvStcGrade.setTypeface(fontComfortaaRegular);
         tvSubjectName.setTypeface(fontComfortaaRegular);
@@ -63,26 +71,31 @@ public class AddGradeFragment extends Fragment implements View.OnClickListener {
         int id = v.getId();
         switch (id){
             case R.id.bt_grade1:
-                btGrade1.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                btGrade1.setTextColor(getResources().getColor(R.color.colorPrimaryWhite));
+                setSelectedGrade(btGrade1);
                 break;
             case R.id.bt_grade2:
-                btGrade2.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                btGrade2.setTextColor(getResources().getColor(R.color.colorPrimaryWhite));
+                setSelectedGrade(btGrade2);
                 break;
             case R.id.bt_grade3:
-                btGrade3.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                btGrade3.setTextColor(getResources().getColor(R.color.colorPrimaryWhite));
+                setSelectedGrade(btGrade3);
                 break;
             case R.id.bt_grade4:
-                btGrade4.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                btGrade4.setTextColor(getResources().getColor(R.color.colorPrimaryWhite));
+                setSelectedGrade(btGrade4);
                 break;
             case R.id.bt_grade5:
-                btGrade5.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                btGrade5.setTextColor(getResources().getColor(R.color.colorPrimaryWhite));
+                setSelectedGrade(btGrade5);
                 break;
 
         }
+    }
+
+    void setSelectedGrade(Button btGrade){
+        if(selectedGrade != null){
+            selectedGrade.setBackground(getResources().getDrawable(R.drawable.bg_rounded_primary));
+            selectedGrade.setTextColor(getResources().getColor(R.color.colorPrimaryWhite));
+        }
+        btGrade.setBackground(getResources().getDrawable(R.drawable.bg_rounded_primary_dark));
+        btGrade.setTextColor(getResources().getColor(R.color.colorPrimaryWhite));
+        selectedGrade = btGrade;
     }
 }

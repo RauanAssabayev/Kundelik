@@ -48,12 +48,15 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/spinner_bg_main">
+
             <Spinner
                 android:id="@+id/sp_select_subject"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:spinnerMode="dialog"
                 android:layout_centerInParent="true"
                 android:popupBackground="@drawable/spinner_bg_main_popup" />
+
         </RelativeLayout>
 
         <RelativeLayout
