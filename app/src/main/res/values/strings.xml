@@ -47,6 +47,7 @@
     <string name="subject_self_knowledge">Самопознание</string>
     <string name="subject_technology">Технология</string>
     <string name="subject_labor">Труд</string>
+    <string name="subject_physics">Физика</string>
     <string name="subject_physical_education">Физическая культура</string>
     <string name="subject_philosophy">Философия</string>
     <string name="subject_chemistry">Химия</string>
@@ -57,5 +58,23 @@
     <string name="subject_ecology">Экология</string>
     <string name="subject_economy">Экономика</string>
     <string name="fragment_timetable_choose_time">- Нажмите, чтобы выбрать -</string>
+
+    <string name="info_text_no_subject">Нет занятий</string>
+    <string name="info_text_subject">занятий</string>
+    <string name="info_text_tasks">Задачи</string>
+    <string name="info_text_grades">Оценки</string>
+    <string name="info_text_hw_subjects">ДЗ по предмету</string>
+    <string name="info_text_hw_grades">Оценки по предмету</string>
+    <string name="info_text_hw_subject">Оценка по предмету</string>
+    <string name="info_text_day_advice">Совет дня</string>
+
+    <string name="info_text_home_word">Домашняя работа</string>
+    <string name="info_text_enter_text">Выбрать время</string>
+
+    <string name="info_text_notify_day_before">Напомнить за день</string>
+    <string name="info_text_choose_time">Выбрать время</string>
+
+    <string name="error_text_oops">Oops!</string>
+    <string name="error_info_wait_next_version">Данной функцией \n Вы сможете воспользоваться \n в следующей версии приложения.</string>
 
 </resources>

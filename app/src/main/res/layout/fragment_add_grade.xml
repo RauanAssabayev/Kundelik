@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#f6f6f6"
-            android:text="Оценка по предмету"
+            android:text="@string/info_text_hw_subject"
             android:gravity="center_vertical"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
@@ -103,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="#f6f6f6"
-                    android:text="Совет дня"
+                    android:text="@string/info_text_day_advice"
                     android:gravity="center_vertical"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
@@ -124,7 +124,7 @@
                 </ScrollView>
             </LinearLayout>
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
+                android:id="@+id/fab_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

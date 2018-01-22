@@ -95,7 +95,7 @@ public class AddHWFragment extends Fragment implements DatePickerDialog.OnDateSe
         Realm mRealm = Realm.getDefaultInstance();
         mRealm.beginTransaction();
         Calendar calendar = Calendar.getInstance();
-        Date date = new Date(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        Date date = new Date(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),calendar.get(Calendar.SECOND));
         HomeWork hw = mRealm.createObject(HomeWork.class,UUID.randomUUID().toString());
         hw.createHW(tvSubjectName.getText()+"",true,date,etHwText.getText().toString(),date);
         mRealm.commitTransaction();
@@ -137,12 +137,15 @@ public class AddHWFragment extends Fragment implements DatePickerDialog.OnDateSe
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         Calendar mcurrentTime        = Calendar.getInstance();
+        final int myYear             = mcurrentTime.get(Calendar.YEAR);
+        final int myMonth            = mcurrentTime.get(Calendar.MONTH);
+        final int day                = mcurrentTime.get(Calendar.DAY_OF_MONTH);
         final int hour               = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         final int minute             = mcurrentTime.get(Calendar.MINUTE);
         TimePickerDialog mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                stchChooseTime.setText(selectedHour+" : "+selectedMinute);
+                stchChooseTime.setText(day+"."+myMonth+"."+myYear+","+selectedHour+" : "+selectedMinute);
             }
         }, hour, minute, true);//Yes 24 hour time
         mTimePicker.setTitle(getString(R.string.dialog_select_finish_time));

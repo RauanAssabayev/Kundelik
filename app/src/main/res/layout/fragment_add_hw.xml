@@ -45,7 +45,7 @@
                 android:paddingLeft="10dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="Напомнить за день" />
+                android:text="@string/info_text_notify_day_before" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,14 +67,14 @@
                 android:paddingLeft="10dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="Выбрать время" />
+                android:text="@string/info_text_choose_time" />
         </LinearLayout>
         <TextView
             android:id="@+id/tv_stc_hw"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#f6f6f6"
-            android:text="Домашняя работа"
+            android:text="@string/info_text_home_word"
             android:gravity="center_vertical"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
@@ -90,7 +90,7 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/white"
                 android:gravity="start"
-                android:hint="Ввидите текст"
+                android:hint="@string/info_text_enter_text"
                 android:imeOptions="actionDone"
                 android:padding="10dp" />
             <android.support.design.widget.FloatingActionButton

@@ -64,10 +64,11 @@ public class WeekScheduleListAdapter extends RecyclerView.Adapter<WeekScheduleLi
         tv_day.setTypeface(fontComfotaaBold);
         tv_countSubjects.setTypeface(fontComfortaaRegular);
         tv_day.setText(dataSet.get(position).getDay());
-        tv_countSubjects.setText(dataSet.get(position).getCount()+" занятий");
+        String sbjText = dataSet.get(position).getCount()+" "+mainview.getResources().getString(R.string.info_text_subject);
+        tv_countSubjects.setText(sbjText);
 
         if(dataSet.get(position).getCount().equals("0")){
-            tv_countSubjects.setText("Нет занятий");
+            tv_countSubjects.setText(mainview.getResources().getString(R.string.info_text_no_subject));
         }
 
 

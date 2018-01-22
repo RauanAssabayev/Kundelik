@@ -64,6 +64,7 @@ public class WeekScheduleListFragment extends Fragment {
         }
         mRealm.commitTransaction();
 
+        daySubjectList.clear();
         String daysName [] = {"Пн","Вт","Ср","Чт","Пт","Сб","Вс"} ;
         for(int i = 0; i<7;i++){
             WeekScheduleItem day = new WeekScheduleItem(daysName[i],days[i]+"");
@@ -87,6 +88,7 @@ public class WeekScheduleListFragment extends Fragment {
                         editor.putInt("day", position);
                         editor.apply();
                         ft.replace(R.id.fragmentContainer, new ScheduleFragment(), "ScheduleFragment");
+                        ft.addToBackStack("ScheduleFragment");
                         ft.commit();
                     }
                     @Override public void onLongItemClick(View view, int position) {

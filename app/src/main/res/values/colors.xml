@@ -14,6 +14,10 @@
     <color name="colorPrimaryGray">#EFF0F1</color>
     <color name="colorSecondaryBlack">#3B4045</color>
     <color name="colorLightPrimary">#F1FFFE</color>
+
+    <color name="colorActive">#FE5722</color>
+    <color name="colorInfo">#0287D0</color>
+
 </resources>
 
 

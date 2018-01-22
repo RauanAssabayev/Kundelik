@@ -59,4 +59,25 @@
     <string name="subject_ecology">Экология</string>
     <string name="subject_economy">Экономика</string>
     <string name="fragment_timetable_choose_time">- Таңдау ушін басыңыз -</string>
+
+
+    <string name="info_text_no_subject">Сабақ жоқ</string>
+    <string name="info_text_subject">сабақ</string>
+    <string name="info_text_tasks">Тапсырмалар</string>
+    <string name="info_text_grades">Бағалар</string>
+    <string name="info_text_hw_subjects">Уй жұмыстары</string>
+    <string name="info_text_hw_grades">Бағалар тізімі</string>
+    <string name="info_text_hw_subject">Баға</string>
+    <string name="info_text_day_advice">Күн кеңесі</string>
+
+    <string name="info_text_home_word">Үй жұмысы</string>
+    <string name="info_text_enter_text">Мәтінді енгізіңіз</string>
+
+    <string name="info_text_notify_day_before">Күн алдын ескерту</string>
+    <string name="info_text_choose_time">Уақытты таңдау</string>
+
+    <string name="error_text_oops">Oops!</string>
+    <string name="error_info_wait_next_version">Бұл функциямен \n Сіз қосымшаның келесі \n нұсқасында қолдана аласыз!</string>
+
+
 </resources>

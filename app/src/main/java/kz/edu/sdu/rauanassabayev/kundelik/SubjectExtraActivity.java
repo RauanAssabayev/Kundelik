@@ -12,7 +12,9 @@ import butterknife.ButterKnife;
 import kz.edu.sdu.rauanassabayev.kundelik.Adapters.ViewPagerAdapter;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.AddHWFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.AddGradeFragment;
+import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ListGradeFragment;
 import kz.edu.sdu.rauanassabayev.kundelik.Fragments.ListHWFragment;
+import kz.edu.sdu.rauanassabayev.kundelik.Helpers.FontFactory;
 
 public class SubjectExtraActivity extends AppCompatActivity {
 
@@ -25,18 +27,17 @@ public class SubjectExtraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_subject_extra);
         ButterKnife.bind(this);
 
-        Typeface fontComfortaaRegular = Typeface.createFromAsset(getAssets(), "Comfortaa-Regular.ttf");
-
+        Typeface fontComfortaaRegular  = FontFactory.getInstance().getFont(this,"Comfortaa-Regular.ttf");
         if(getIntent().getExtras().getString("action").equals("list")) setupViewPagerList(vpSubjectActions);
         else setupViewPagerAdd(vpSubjectActions);
 
         tlSubjectActions.setupWithViewPager(vpSubjectActions);
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tabOne.setText("Задачи");
+        tabOne.setText(getResources().getString(R.string.info_text_tasks));
         tabOne.setTypeface(fontComfortaaRegular);
         tlSubjectActions.getTabAt(0).setCustomView(tabOne);
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tabTwo.setText("Оценки");
+        tabTwo.setText(getResources().getString(R.string.info_text_grades));
         tabTwo.setTypeface(fontComfortaaRegular);
         tlSubjectActions.getTabAt(1).setCustomView(tabTwo);
 
@@ -54,7 +55,7 @@ public class SubjectExtraActivity extends AppCompatActivity {
     private void setupViewPagerList(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new ListHWFragment(),"Задачи");
-        adapter.addFrag(new AddGradeFragment(),"Оценки");
+        adapter.addFrag(new ListGradeFragment(),"Оценки");
         viewPager.setAdapter(adapter);
     }
 }

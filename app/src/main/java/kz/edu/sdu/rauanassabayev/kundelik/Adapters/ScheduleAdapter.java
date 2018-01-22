@@ -127,7 +127,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
             }
         });
 
-
         tv_countSubjects.setText(dataSet.get(position).getNumber()+"");
         tv_countSubjects.setTypeface(fontComfortaaRegular);
         tv_time_from_subject.setText(dataSet.get(position).getTimeFrom());
@@ -137,13 +136,12 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
         tv_subject_name.setText(dataSet.get(position).getName());
         tv_subject_name.setTypeface(fontComfortaaRegular);
         tv_notes_count.setText(dataSet.get(position).getNotesCount()+"");
-        tv_attach_count.setText(dataSet.get(position).getAvgGrades()+"");
+        double avgGrades = Math.round(dataSet.get(position).getAvgGrades() * 100.0) / 100.0;
+        tv_attach_count.setText(avgGrades+"");
         tv_attach_count.setTypeface(fontComfortaaRegular);
         tv_notes_count.setTypeface(fontComfortaaRegular);
-
         int resId = context.getResources().getIdentifier(dataSet.get(position).getIcon(), "drawable", context.getPackageName());
         iv_subject_icon.setImageResource(resId);
-
 
     }
 
@@ -151,6 +149,5 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
     public int getItemCount() {
         return dataSet.size();
     }
-
 
 }

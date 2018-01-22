@@ -120,7 +120,6 @@ public class RecyclerViewSwipeHelper extends ItemTouchHelper.Callback {
             mRealm.commitTransaction();
             mrv.setAdapter(mAdapter);
         }else{
-            Log.d("MYLOGS","EMPTY");
             mRealm.cancelTransaction();
         }
 
@@ -156,7 +155,6 @@ public class RecyclerViewSwipeHelper extends ItemTouchHelper.Callback {
                                 //mAdapter.notifyItemRangeChanged(viewHolder.getAdapterPosition(), mAdapter.getItemCount());
                                 mAdapter.notifyDataSetChanged();
                                 mrv.setAdapter(mAdapter);
-                                Log.d("KEY","SUCCESS");
                             }
                         });
 
